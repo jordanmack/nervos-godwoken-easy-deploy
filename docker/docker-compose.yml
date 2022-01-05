@@ -22,12 +22,13 @@ services:
       - ../cache/activity/redis-data:/data
 
   godwoken:
-    image: nervos/godwoken-prebuilds:v0.7.2
+    image: nervos/godwoken-prebuilds:v0.8.0-rc1
     restart: always
     volumes:
     - ../testnet-godwoken-readonly-config.toml:/deploy/config.toml
+    - ../db.toml:/deploy/db.toml
     - ../block-producer-private-key.txt:/deploy/pk
-    - ../cache/activity/store.db:/store.db
+    - ../cache/activity/storedb:/storedb
     environment:
       RUST_BACKTRACE: 1
     command: godwoken run -c /deploy/config.toml
@@ -37,7 +38,7 @@ services:
       - postgres
 
   web3:
-    image: nervos/godwoken-web3-prebuilds:v0.8.1-rc2
+    image: nervos/godwoken-web3-prebuilds:v0.10.0
     volumes: 
       - ../web3.env:/godwoken-web3/packages/api-server/.env
     working_dir: /godwoken-web3
