@@ -29,6 +29,7 @@ services:
     - ../db.toml:/deploy/db.toml
     - ../block-producer-private-key.txt:/deploy/pk
     - ../cache/activity/storedb:/storedb
+    - ../cache/activity/mem-pool:/mem-pool
     environment:
       RUST_BACKTRACE: 1
     command: godwoken run -c /deploy/config.toml
